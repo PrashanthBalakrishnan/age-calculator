@@ -17,6 +17,8 @@ $font-family: "Poppins", sans-serif;
 *,
 *::before,
 *::after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -47,15 +49,18 @@ svg {
 
 body {
   background-color: $neutral-200;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: $font-family;
 }
 
 // APP STYLING
 .app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-family: $font-family;
+  padding: 0 10px;
+  border-radius: 25px 25px 200px 25px;
+  overflow: hidden;
+  max-width: 840px;
 }
 
 // COMPONENT STYLING
@@ -63,8 +68,6 @@ body {
 .calculator {
   background-color: $neutral-100;
   padding: 50px;
-  width: 850px;
-  border-radius: 25px 25px 170px 25px;
 }
 
 .form {
@@ -75,6 +78,10 @@ body {
     margin: 50px 0;
     border-bottom: 2px solid $neutral-300;
     position: relative;
+    min-width: 700px;
+    @media (max-width: 700px) {
+      min-width: 300px;
+    }
   }
   &__button {
     position: absolute;
@@ -90,22 +97,32 @@ body {
     align-items: center;
     background-color: $color-primary;
     cursor: pointer;
+    &:hover {
+      background-color: hsl(259, 100%, 55%);
+    }
+    @media (max-width: 700px) {
+      right: 50%;
+      top: 50%;
+      transform: translate(50%, -50%);
+    }
   }
 }
 
 // RESULT
 
 .result {
-  font-size: 5rem;
+  font-size: 6rem;
   font-weight: 800;
   font-style: italic;
   color: $neutral-500;
-  &__container {
+  line-height: 1.2;
+
+  @media (max-width: 700px) {
+    font-size: 5rem;
   }
+
   &__num {
     color: $color-primary;
-  }
-  &__name {
   }
 }
 
@@ -113,25 +130,30 @@ body {
 
 .input {
   margin-right: 25px;
+
   &__label {
     font-weight: 500;
     color: $neutral-400;
   }
 
-  &__wrapper {
-  }
-
   &__field {
-    width: 160px;
-    padding: 25px;
+    max-width: 160px;
+    padding: 15px 25px;
     border-radius: 10px;
     border: 1px solid $neutral-300;
     font-size: $font-size-base;
     font-weight: 700;
     color: $neutral-500;
+    @media (max-width: 700px) {
+      max-width: 130px;
+    }
+
     &::placeholder {
       font-weight: 700;
       font-size: $font-size-base;
+      @media (max-width: 700px) {
+        font-size: 1.5rem;
+      }
     }
     &:focus {
       outline: 1px solid $color-primary;
@@ -140,7 +162,21 @@ body {
     &--error {
       border-color: $error-color;
     }
-    &--disabled {
-    }
+  }
+
+  &__error {
+    color: $error-color;
+    font-size: 14px;
+    font-style: italic;
+  }
+}
+
+// ERROR INDICATOR
+.invalid {
+  color: $error-color;
+  &__message {
+    color: $error-color;
+    font-size: 14px;
+    font-style: italic;
   }
 }
