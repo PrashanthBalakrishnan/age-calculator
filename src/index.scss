@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,700;1,400;1,800&display=swap");
+// Variables
+$color-primary: hsl(259, 100%, 65%);
+$error-color: hsl(0, 100%, 67%);
+
+$neutral-100: hsl(0, 0%, 100%);
+$neutral-200: hsl(0, 0%, 94%);
+$neutral-300: hsl(0, 0%, 86%);
+$neutral-400: hsl(0, 1%, 44%);
+$neutral-500: hsl(0, 0%, 8%);
+
+$font-size-base: 2rem;
+
+$font-family: "Poppins", sans-serif;
+
+// RESETS
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  font: inherit;
+}
+
+// REMOVES NUMBER CONTROLER FOR INPUTS
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+body {
+  background-color: $neutral-200;
+}
+
+// APP STYLING
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: $font-family;
+}
+
+// COMPONENT STYLING
+
+.calculator {
+  background-color: $neutral-100;
+  padding: 50px;
+  width: 850px;
+  border-radius: 25px 25px 170px 25px;
+}
+
+.form {
+  &__item {
+    display: flex;
+  }
+  &__line {
+    margin: 50px 0;
+    border-bottom: 2px solid $neutral-300;
+    position: relative;
+  }
+  &__button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    border: none;
+    height: 90px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-primary;
+    cursor: pointer;
+  }
+}
+
+// RESULT
+
+.result {
+  font-size: 5rem;
+  font-weight: 800;
+  font-style: italic;
+  color: $neutral-500;
+  &__container {
+  }
+  &__num {
+    color: $color-primary;
+  }
+  &__name {
+  }
+}
+
+/*** INPUT ***/
+
+.input {
+  margin-right: 25px;
+  &__label {
+    font-weight: 500;
+    color: $neutral-400;
+  }
+
+  &__wrapper {
+  }
+
+  &__field {
+    width: 160px;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid $neutral-300;
+    font-size: $font-size-base;
+    font-weight: 700;
+    color: $neutral-500;
+    &::placeholder {
+      font-weight: 700;
+      font-size: $font-size-base;
+    }
+    &:focus {
+      outline: 1px solid $color-primary;
+      caret-color: $color-primary;
+    }
+    &--error {
+      border-color: $error-color;
+    }
+    &--disabled {
+    }
+  }
+}
