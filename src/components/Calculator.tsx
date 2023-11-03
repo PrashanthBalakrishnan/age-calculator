@@ -42,7 +42,11 @@ const Calculator = () => {
       dayInMonth[1] = 29;
     }
     // YEAR
-    if (currentYear - year < 0 || year > new Date().getFullYear() - 1) {
+    if (
+      currentYear - year < 0 ||
+      year > new Date().getFullYear() - 1 ||
+      (year > 0 && year < currentYear - 120)
+    ) {
       setValidYear(false);
       setAge({ years: "--", months: "--", days: "--" });
       return;
@@ -108,7 +112,7 @@ const Calculator = () => {
             type="number"
             register={register}
             errors={errors}
-            errorMessage="Must be in the past"
+            errorMessage="Must be a valid year"
             isValid={validYear}
           />
         </div>
