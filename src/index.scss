@@ -155,10 +155,7 @@ body {
       max-width: 90px;
       padding: 10px 15px;
       font-size: 1rem;
-
-      &:last-child {
-        margin-right: 0;
-      }
+      margin-bottom: 20px;
     }
 
     &::placeholder {
