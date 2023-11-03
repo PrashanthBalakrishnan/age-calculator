@@ -1,5 +1,5 @@
 import Input from "./Input";
-import { FieldValues, SubmitHandler, set, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import iconArrow from "../assets/icon-arrow.svg";
 
 import { useState } from "react";
