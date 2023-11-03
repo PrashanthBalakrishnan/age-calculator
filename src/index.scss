@@ -53,6 +53,10 @@ body {
   display: grid;
   place-items: center;
   font-family: $font-family;
+  @media (max-width: 700px) {
+    min-height: 100%;
+    width: 100%;
+  }
 }
 
 // APP STYLING
