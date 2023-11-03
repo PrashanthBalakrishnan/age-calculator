@@ -39,15 +39,15 @@ const Calculator = () => {
       dayInMonth[1] = 29;
     }
     // YEAR
+    console.log(currentYear - year < 0);
     currentYear - year < 0 ? setValidYear(false) : setValidYear(true);
-    year < 100 ? setValidYear(false) : setValidYear(true);
-
+    if (year > new Date().getFullYear() - 1) {
+      setValidYear(false);
+    }
     // MONTH
+    console.log(date.getMonth());
     month < 1 ? setValidMonth(false) : setValidMonth(true);
     month > 12 ? setValidMonth(false) : setValidMonth(true);
-    month > new Date().getMonth() + 1
-      ? setValidMonth(false)
-      : setValidMonth(true);
 
     // DAY
     day < 1 ? setValidDay(false) : setValidDay(true);
