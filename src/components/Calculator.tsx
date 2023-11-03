@@ -1,5 +1,5 @@
 import Input from "./Input";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, set, useForm } from "react-hook-form";
 import iconArrow from "../assets/icon-arrow.svg";
 
 import { useState } from "react";
@@ -23,6 +23,9 @@ const Calculator = () => {
 
   // Validates and Calculates the age
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setValidDay(false);
+    setValidMonth(false);
+    setValidYear(false);
     const { day, month, year } = data;
     const birthYear = year;
     const birthMonth = month - 1;
@@ -39,27 +42,41 @@ const Calculator = () => {
       dayInMonth[1] = 29;
     }
     // YEAR
-    console.log(currentYear - year < 0);
-    currentYear - year < 0 ? setValidYear(false) : setValidYear(true);
-    if (year > new Date().getFullYear() - 1) {
+    if (currentYear - year < 0 || year > new Date().getFullYear() - 1) {
       setValidYear(false);
+      setAge({ years: "--", months: "--", days: "--" });
+      return;
+    } else {
+      setValidYear(true);
     }
+
     // MONTH
-    console.log(date.getMonth());
-    month < 1 ? setValidMonth(false) : setValidMonth(true);
-    month > 12 ? setValidMonth(false) : setValidMonth(true);
+    if (month < 1 || month > 12) {
+      setValidMonth(false);
+      setAge({ years: "--", months: "--", days: "--" });
+      return;
+    } else {
+      setValidMonth(true);
+    }
 
     // DAY
-    day < 1 ? setValidDay(false) : setValidDay(true);
-    day > dayInMonth[month - 1] ? setValidDay(false) : setValidDay(true);
+    if (day < 1 || day > dayInMonth[month - 1]) {
+      setValidDay(false);
+      setAge({ years: "--", months: "--", days: "--" });
+      return;
+    } else {
+      setValidDay(true);
+    }
 
     const ageInMs = today.getTime() - birthDateObj.getTime();
     const ageDate = new Date(ageInMs);
     const years = String(ageDate.getUTCFullYear() - 1970);
     const months = String(ageDate.getUTCMonth());
     const days = String(ageDate.getUTCDate() - 1);
+
     setAge({ years, months, days });
   };
+
   return (
     <div className="calculator">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
