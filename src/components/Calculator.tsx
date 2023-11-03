@@ -24,49 +24,44 @@ const Calculator = () => {
   // Validates and Calculates the age
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const { day, month, year } = data;
-
+    console.log(day, month, year);
     const birthYear = year;
     const birthMonth = month - 1;
     const birthDay = day;
 
-    if (birthDay > 31 || birthDay < 1) {
-      setValidDay(false);
-    } else {
-      setValidDay(true);
-    }
-    if (birthMonth > 12 || birthMonth < 1) {
-      setValidMonth(false);
-    } else {
-      setValidMonth(true);
-    }
-    if (birthYear > new Date().getFullYear() || birthYear < 1900) {
-      setValidYear(false);
-    } else {
-      setValidYear(true);
-    }
-    if (
-      birthDay > 31 ||
-      birthDay < 1 ||
-      birthMonth > 12 ||
-      birthMonth < 1 ||
-      birthYear > new Date().getFullYear() ||
-      birthYear < 1900
-    ) {
-      return;
-    }
-
+    const date = new Date();
     const today = new Date();
     const birthDateObj = new Date(birthYear, birthMonth, birthDay);
+    const dayInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const currentYear = date.getFullYear();
+
+    //Check leap year
+    if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+      dayInMonth[1] = 29;
+    }
+    // YEAR
+    currentYear - year < 0 ? setValidYear(false) : setValidYear(true);
+    year < 100 ? setValidYear(false) : setValidYear(true);
+
+    console.log(month);
+    // MONTH
+    month < 1 ? setValidMonth(false) : setValidMonth(true);
+    month > 12 ? setValidMonth(false) : setValidMonth(true);
+    month > new Date().getMonth() + 1
+      ? setValidMonth(false)
+      : setValidMonth(true);
+
+    // DAY
+    day < 1 ? setValidDay(false) : setValidDay(true);
+    day > dayInMonth[month - 1] ? setValidDay(false) : setValidDay(true);
 
     const ageInMs = today.getTime() - birthDateObj.getTime();
     const ageDate = new Date(ageInMs);
     const years = String(ageDate.getUTCFullYear() - 1970);
     const months = String(ageDate.getUTCMonth());
     const days = String(ageDate.getUTCDate() - 1);
-
     setAge({ years, months, days });
   };
-  console.log(validDay, validMonth, validYear);
   return (
     <div className="calculator">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
