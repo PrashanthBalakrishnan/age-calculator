@@ -23,9 +23,6 @@ const Calculator = () => {
 
   // Validates and Calculates the age
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    setValidDay(false);
-    setValidMonth(false);
-    setValidYear(false);
     const { day, month, year } = data;
     const birthYear = year;
     const birthMonth = month - 1;
@@ -41,11 +38,14 @@ const Calculator = () => {
     if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
       dayInMonth[1] = 29;
     }
+
     // YEAR
     if (
       currentYear - year < 0 ||
       year > new Date().getFullYear() - 1 ||
-      (year > 0 && year < currentYear - 120)
+      (year > 0 && year < currentYear - 120) ||
+      year < 1 ||
+      year > currentYear
     ) {
       setValidYear(false);
       setAge({ years: "--", months: "--", days: "--" });
