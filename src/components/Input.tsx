@@ -38,7 +38,6 @@ const Input: React.FC<InputProps> = ({
           className={clsx("input__field", !isValid && "input__field--error")}
           id={id}
           type={type}
-          autoComplete={id}
           disabled={disabled}
           placeholder={placeholder}
           {...register(id, {

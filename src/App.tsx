@@ -2,9 +2,10 @@ import Calculator from "./components/Calculator";
 
 const App = () => {
   return (
-    <div className="app">
+    <main className="app">
+      <h1 className="title">Age Calculator</h1>
       <Calculator />
-    </div>
+    </main>
   );
 };
 export default App;
